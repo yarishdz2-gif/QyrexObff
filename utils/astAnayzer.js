@@ -1,4 +1,4 @@
-// AST Analyzer - Debug and analysis tool for Qyrexobf
+// AST Analyzer - Debug and analysis tool for CypherShield
 import * as Nodes from '../ast/nodes.js';
 
 export class ASTAnalyzer {

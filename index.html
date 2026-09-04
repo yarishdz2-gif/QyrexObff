@@ -38,8 +38,8 @@
 <body>
 <main class="shell">
   <nav class="nav">
-    <div class="brand"><div class="mark">Q</div><div>Qyrexobf<small>5 layers</small></div></div>
-    <div class="badge">v2.2</div>
+    <div class="brand"><div class="mark">Q</div><div>Qyrexobf<small>Katty AST · XOR+Base64</small></div></div>
+    <div class="badge">v2.0 · real</div>
   </nav>
 
   <section class="panel">
@@ -58,11 +58,11 @@
     </div>
 
     <div class="opts">
-      <label class="check"><input type="checkbox" id="strings" checked /> 1. Strings</label>
-      <label class="check"><input type="checkbox" id="names" checked /> 2. Names</label>
-      <label class="check"><input type="checkbox" id="controlFlow" /> 3. Control flow</label>
-      <label class="check"><input type="checkbox" id="antiSandbox" /> 4. Anti-sandbox</label>
-      <label class="check"><input type="checkbox" id="junk" checked /> 5. Junk / numbers</label>
+      <label class="check"><input type="checkbox" id="stringEncryption" checked /> String XOR+B64</label>
+      <label class="check"><input type="checkbox" id="nameMangling" checked /> Name mangling</label>
+      <label class="check"><input type="checkbox" id="controlFlow" /> Control flow</label>
+      <label class="check"><input type="checkbox" id="antiSandbox" /> Anti-sandbox</label>
+      
       <label class="check"><input type="checkbox" id="compact" /> Compact</label>
     </div>
 
@@ -82,20 +82,20 @@
       <button class="btn" id="btnDownload">Descargar .js</button>
     </div>
   </section>
-  <div class="foot">Qyrexobf · package.json · server.js · obfuscator.js · index.html</div>
+  <div class="foot">Qyrexobf · Katty pipeline · XOR + Base64</div>
 </main>
 <script>
 const $=id=>document.getElementById(id);
 const PRE={
-  Low:{strings:1,names:1,controlFlow:0,antiSandbox:0,junk:1},
-  Medium:{strings:1,names:1,controlFlow:0,antiSandbox:0,junk:1},
-  High:{strings:1,names:1,controlFlow:1,antiSandbox:1,junk:1},
-  Ultra:{strings:1,names:1,controlFlow:1,antiSandbox:1,junk:1}
+  Low:{stringEncryption:1,nameMangling:1,controlFlow:0,antiSandbox:0},
+  Medium:{stringEncryption:1,nameMangling:1,controlFlow:0,antiSandbox:0},
+  High:{stringEncryption:1,nameMangling:1,controlFlow:1,antiSandbox:1},
+  Ultra:{stringEncryption:1,nameMangling:1,controlFlow:1,antiSandbox:1}
 };
 $('preset').onchange=()=>{
   const d=PRE[$('preset').value]||PRE.Medium;
-  $('strings').checked=!!d.strings;
-  $('names').checked=!!d.names;
+  $('stringEncryption').checked=!!d.stringEncryption;
+  $('nameMangling').checked=!!d.nameMangling;
   $('controlFlow').checked=!!d.controlFlow;
   $('antiSandbox').checked=!!d.antiSandbox;
   $('junk').checked=!!d.junk;
@@ -109,9 +109,8 @@ $('btnObf').onclick=async()=>{
     const t0=performance.now();
     const res=await fetch('/api/obfuscate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       code,preset:$('preset').value,
-      strings:$('strings').checked,names:$('names').checked,
-      controlFlow:$('controlFlow').checked,antiSandbox:$('antiSandbox').checked,
-      junk:$('junk').checked,compact:$('compact').checked
+      stringEncryption:$('stringEncryption').checked,nameMangling:$('nameMangling').checked,
+      controlFlow:$('controlFlow').checked,antiSandbox:$('antiSandbox').checked,compact:$('compact').checked
     })});
     const data=await res.json();
     if(!res.ok)throw new Error(data.error||('HTTP '+res.status));

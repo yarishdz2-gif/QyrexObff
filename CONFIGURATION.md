@@ -1,8 +1,8 @@
-# CypherShield Configuration Guide
+# Qyrexobf Configuration Guide
 
-## Configuration File (.cyphershield.json)
+## Configuration File (.qyrexobf.json)
 
-Place this file in your project root to customize CypherShield behavior:
+Place this file in your project root to customize Qyrexobf behavior:
 
 ```json
 {
@@ -25,13 +25,13 @@ Place this file in your project root to customize CypherShield behavior:
 
 ```bash
 # Enable debug mode
-export CYPHERSHIELD_DEBUG=true
+export QYREXOBF_DEBUG=true
 
 # Set default preset
-export CYPHERSHIELD_PRESET=High
+export QYREXOBF_PRESET=High
 
 # Specify output directory
-export CYPHERSHIELD_OUTPUT_DIR=./protected
+export QYREXOBF_OUTPUT_DIR=./protected
 ```
 
 ## Programmatic Configuration
@@ -118,8 +118,9 @@ const config = {
 
 ### Custom Encryption Key
 ```javascript
-const obfuscator = new CypherShield({
-  });
+const obfuscator = new Qyrexobf({
+  encryptionKey: 0xAB,  // Custom XOR key
+});
 ```
 
 ### Selective Obfuscation
@@ -191,23 +192,23 @@ Use glob patterns to exclude files:
 
 Load config from file:
 ```bash
-cyphershield --config .cyphershield.json input.js
+qyrexobf --config .qyrexobf.json input.js
 ```
 
 Override config option:
 ```bash
-cyphershield -p Ultra --override stringEncryption=false input.js
+qyrexobf -p Ultra --override stringEncryption=false input.js
 ```
 
 ## Integration with Build Tools
 
 ### Webpack
 ```javascript
-const CypherShieldPlugin = require('cyphershield/webpack-plugin');
+const QyrexobfPlugin = require('qyrexobf/webpack-plugin');
 
 module.exports = {
   plugins: [
-    new CypherShieldPlugin({
+    new QyrexobfPlugin({
       preset: 'High',
       exclude: /node_modules/,
     })
@@ -217,11 +218,11 @@ module.exports = {
 
 ### Rollup
 ```javascript
-import cyphershield from 'cyphershield/rollup-plugin';
+import qyrexobf from 'qyrexobf/rollup-plugin';
 
 export default {
   plugins: [
-    cyphershield({
+    qyrexobf({
       preset: 'Medium',
       include: 'src/**/*.js',
     })
@@ -231,11 +232,11 @@ export default {
 
 ### Gulp
 ```javascript
-const cyphershield = require('cyphershield/gulp');
+const qyrexobf = require('qyrexobf/gulp');
 
 gulp.task('obfuscate', () => {
   return gulp.src('src/**/*.js')
-    .pipe(cyphershield({ preset: 'High' }))
+    .pipe(qyrexobf({ preset: 'High' }))
     .pipe(gulp.dest('dist'));
 });
 ```
@@ -244,7 +245,7 @@ gulp.task('obfuscate', () => {
 
 Enable detailed logging:
 ```javascript
-const obfuscator = new CypherShield({
+const obfuscator = new Qyrexobf({
   debugLogging: true,
 });
 

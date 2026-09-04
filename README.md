@@ -1,4 +1,4 @@
-# CypherShield v2.0.0
+# Qyrexobf v2.0.0
 
 **Advanced Multi-Layer JavaScript Obfuscator** — Fusion de Prometheus + IronBrew2 + Anti-Sandbox Evasion
 
@@ -6,7 +6,7 @@
 
 ### Core Obfuscation Layers
 - **Name Mangling** — Renombra variables, funciones y parámetros automáticamente
-- **String Encryption** — Encripta strings con PrintableGlyph (sin sin XOR ni Base64) (técnica Prometheus)
+- **String Encryption** — Encripta strings con XOR + Base64 (técnica Prometheus)
 - **Control Flow Flattening** — Aplana estructura de control (técnica IronBrew2)
 - **Anti-Sandbox Detection** — Inyecta detección de entornos de análisis
 - **Dead Code Injection** — Agrega código muerto para confundir análisis estático
@@ -22,9 +22,9 @@
 ## Installation
 
 ```bash
-npm install -g cyphershield
+npm install -g qyrexobf
 # o
-npm install cyphershield --save-dev
+npm install qyrexobf --save-dev
 ```
 
 ## Quick Start
@@ -33,24 +33,24 @@ npm install cyphershield --save-dev
 
 ```bash
 # Ofuscación básica (preset Medium)
-cyphershield input.js
+qyrexobf input.js
 
 # Con preset específico
-cyphershield -p High input.js
+qyrexobf -p High input.js
 
 # Salida personalizada
-cyphershield -o protected.js input.js
+qyrexobf -o protected.js input.js
 
 # Con todas las opciones
-cyphershield -p Ultra --anti-sandbox --debug --compact input.js
+qyrexobf -p Ultra --anti-sandbox --debug --compact input.js
 ```
 
 ### Programmatic Usage
 
 ```javascript
-import CypherShield from 'cyphershield';
+import Qyrexobf from 'qyrexobf';
 
-const obfuscator = new CypherShield({
+const obfuscator = new Qyrexobf({
   preset: 'High',
   stringEncryption: true,
   controlFlowFlattening: true,
@@ -112,7 +112,7 @@ console.log(result.summary);    // Statistics
 
 ## API Reference
 
-### CypherShield(config)
+### Qyrexobf(config)
 
 Constructor que inicializa el obfuscador.
 
@@ -120,7 +120,7 @@ Constructor que inicializa el obfuscador.
 ```javascript
 {
   preset: 'Medium',              // Preset: Low, Medium, High, Ultra
-  stringEncryption: true,        // PrintableGlyph string protection
+  stringEncryption: true,        // Encriptar strings
   controlFlowFlattening: true,   // Aplanar control flow
   nameMangling: true,            // Renombrar variables
   antiSandbox: false,            // Inyectar detección de sandbox
@@ -175,7 +175,7 @@ results.forEach(r => console.log(r.input, '->', r.output));
 ## Architecture
 
 ```
-CypherShield/
+Qyrexobf/
 ├── core/
 │   ├── index.js            # Main orchestrator
 │   ├── tokenizer.js        # Lexical analysis
@@ -313,8 +313,8 @@ MIT
 
 ## Author
 
-SentinelCore — Advanced Security Research
+Qyrex — Advanced Security Research
 
 ---
 
-**CypherShield** — Where code protection meets obfuscation science.
+**Qyrexobf** — Where code protection meets obfuscation science.

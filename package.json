@@ -1,0 +1,16 @@
+{
+  "name": "qyrexobf",
+  "version": "2.1.0",
+  "description": "Qyrexobf — single-file JS obfuscator + web panel",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo ok"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

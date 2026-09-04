@@ -1,7 +1,7 @@
 {
   "name": "qyrexobf",
   "version": "2.1.0",
-  "description": "Qyrexobf — single-file JS obfuscator + web panel",
+  "description": "Qyrexobf — JS obfuscator with web panel",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -1,6 +1,6 @@
 // Parser - Syntax analysis phase
 import { TokenTypes } from './tokenizer.js';
-import * as Nodes from '../ast/nodes.js';
+import * as Nodes from './nodes.js';
 
 export class Parser {
   constructor(tokens) {

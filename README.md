@@ -1,4 +1,4 @@
-# Qyrexobf v2.0.0
+# CypherShield v2.0.0
 
 **Advanced Multi-Layer JavaScript Obfuscator** — Fusion de Prometheus + IronBrew2 + Anti-Sandbox Evasion
 
@@ -22,9 +22,9 @@
 ## Installation
 
 ```bash
-npm install -g qyrexobf
+npm install -g cyphershield
 # o
-npm install qyrexobf --save-dev
+npm install cyphershield --save-dev
 ```
 
 ## Quick Start
@@ -33,24 +33,24 @@ npm install qyrexobf --save-dev
 
 ```bash
 # Ofuscación básica (preset Medium)
-qyrexobf input.js
+cyphershield input.js
 
 # Con preset específico
-qyrexobf -p High input.js
+cyphershield -p High input.js
 
 # Salida personalizada
-qyrexobf -o protected.js input.js
+cyphershield -o protected.js input.js
 
 # Con todas las opciones
-qyrexobf -p Ultra --anti-sandbox --debug --compact input.js
+cyphershield -p Ultra --anti-sandbox --debug --compact input.js
 ```
 
 ### Programmatic Usage
 
 ```javascript
-import Qyrexobf from 'qyrexobf';
+import CypherShield from 'cyphershield';
 
-const obfuscator = new Qyrexobf({
+const obfuscator = new CypherShield({
   preset: 'High',
   stringEncryption: true,
   controlFlowFlattening: true,
@@ -112,7 +112,7 @@ console.log(result.summary);    // Statistics
 
 ## API Reference
 
-### Qyrexobf(config)
+### CypherShield(config)
 
 Constructor que inicializa el obfuscador.
 
@@ -175,7 +175,7 @@ results.forEach(r => console.log(r.input, '->', r.output));
 ## Architecture
 
 ```
-Qyrexobf/
+CypherShield/
 ├── core/
 │   ├── index.js            # Main orchestrator
 │   ├── tokenizer.js        # Lexical analysis
@@ -313,8 +313,8 @@ MIT
 
 ## Author
 
-Qyrex — Advanced Security Research
+SentinelCore — Advanced Security Research
 
 ---
 
-**Qyrexobf** — Where code protection meets obfuscation science.
+**CypherShield** — Where code protection meets obfuscation science.

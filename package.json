@@ -1,18 +1,31 @@
 {
-  "name": "qyrexobf",
+  "name": "cyphershield",
   "version": "2.0.0",
-  "description": "Qyrexobf — Katty/CypherShield pipeline (XOR+Base64 strings, AST layers)",
+  "description": "Advanced JavaScript obfuscator with multi-layer fusion (Prometheus + IronBrew2 + Sandbox Evasion)",
   "main": "core/index.js",
   "type": "module",
-  "scripts": {
-    "start": "node server.js",
-    "build": "echo ok",
-    "obfuscate": "node cli/index.js"
+  "bin": {
+    "cyphershield": "./cli/index.js"
   },
+  "scripts": {
+    "obfuscate": "node cli/index.js",
+    "test": "node test/runner.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "obfuscator",
+    "javascript",
+    "security",
+    "code-protection"
+  ],
+  "author": "SentinelCore",
+  "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=16.0.0"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "express-rate-limit": "^7.5.0"
   }
 }

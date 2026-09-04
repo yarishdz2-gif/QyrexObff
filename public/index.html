@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QyrexObf — Web Obfuscator</title>
+<style>
+:root{color-scheme:dark;--bg:#08090d;--panel:#10121a;--panel2:#141724;--line:#252a3a;--text:#eef1f8;--muted:#8d95a8;--accent:#9d5cff;--accent2:#55dfff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#1a1030 0,transparent 32%),radial-gradient(circle at 90% 10%,#08232a 0,transparent 28%),var(--bg);color:var(--text);font:14px Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}.wrap{width:min(1450px,94vw);margin:auto;padding:28px 0 45px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand{font-size:24px;font-weight:900;letter-spacing:-.04em}.brand b{color:var(--accent)}.sub{color:var(--muted);margin-top:5px}.badge{border:1px solid var(--line);background:#0c0e14;padding:8px 12px;border-radius:999px;color:#aeb6c7}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:linear-gradient(180deg,#11141d,#0d0f15);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 70px #0006;overflow:hidden}.head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.head strong{font-size:13px}.body{padding:16px}.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}.select,.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:10px 13px}.btn{cursor:pointer;font-weight:700}.primary{border-color:#8b4eff;background:linear-gradient(135deg,#7c39ec,#a961ff)}.ghost:hover{border-color:#40475e}.editor{min-height:470px;width:100%;resize:vertical;border:1px solid var(--line);outline:none;background:#090b10;color:#dce1ed;border-radius:14px;padding:15px;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.stat{border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--muted)}.stat b{color:var(--text)}.note{padding:10px 12px;margin-top:10px;border-radius:10px;background:#0d1119;color:var(--muted);border:1px solid var(--line)}.foot{margin-top:15px;color:var(--muted);font-size:12px;text-align:center}@media(max-width:900px){.grid{grid-template-columns:1fr}.editor{min-height:360px}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div><div class="brand">Qyrex<b>Obf</b></div><div class="sub">Web obfuscator — no XOR / no Base64 transport</div></div><div class="badge">Render Ready · v2.3.0</div></div>
+  <div class="grid">
+    <section class="card"><div class="head"><strong>Source</strong><span class="sub">JavaScript</span></div><div class="body"><div class="actions"><select id="preset" class="select"><option>Low</option><option>Medium</option><option selected>High</option><option>Ultra</option></select><button id="obf" class="btn primary">▶ Obfuscate</button><button id="clear" class="btn ghost">Clear</button></div><textarea id="source" class="editor" spellcheck="false" placeholder="Paste your JavaScript here..."></textarea></div></section>
+    <section class="card"><div class="head"><strong>Protected output</strong><button id="copy" class="btn ghost">Copy</button></div><div class="body"><textarea id="output" class="editor" spellcheck="false" readonly placeholder="Your protected code will appear here..."></textarea><div class="stats"><div class="stat">Original: <b id="orig">—</b></div><div class="stat">Output: <b id="size">—</b></div><div class="stat">Preset: <b id="used">—</b></div></div><div id="status" class="note">Ready.</div></div></section>
+  </div>
+  <div class="foot">QyrexObf runs the transformation on the server. Do not submit secrets or credentials.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);const source=$('source'),output=$('output'),status=$('status');
+$('obf').onclick=async()=>{const src=source.value;if(!src.trim()){status.textContent='Paste some JavaScript first.';return}status.textContent='Obfuscating…';$('obf').disabled=true;try{const r=await fetch('/api/obfuscate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({source:src,preset:$('preset').value,compact:true})});const d=await r.json();if(!r.ok)throw new Error(d.error||'Request failed');output.value=d.code;$('orig').textContent=(d.summary.originalSize||0)+' bytes';$('size').textContent=(d.summary.obfuscatedSize||0)+' bytes';$('used').textContent=d.preset;status.textContent='Done.'}catch(e){status.textContent=e.message;output.value=''}finally{$('obf').disabled=false}};
+$('copy').onclick=async()=>{if(!output.value)return;await navigator.clipboard.writeText(output.value);status.textContent='Copied to clipboard.'};$('clear').onclick=()=>{source.value='';output.value='';$('orig').textContent=$('size').textContent=$('used').textContent='—';status.textContent='Ready.'};
+</script>
+</body></html>

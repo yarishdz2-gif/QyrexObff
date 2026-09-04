@@ -1,16 +1,20 @@
 {
-  "name": "qyrexobf",
-  "version": "2.2.0",
-  "description": "Qyrexobf — 5-layer JS obfuscator",
-  "main": "server.js",
+  "name": "cyphershield",
+  "version": "2.0.0",
+  "description": "Advanced JavaScript obfuscator with multi-layer fusion (Prometheus + IronBrew2 + Sandbox Evasion)",
+  "main": "core/index.js",
+  "type": "module",
+  "bin": {
+    "cyphershield": "./cli/index.js"
+  },
   "scripts": {
-    "start": "node server.js",
-    "build": "echo ok"
+    "obfuscate": "node cli/index.js",
+    "test": "node test/runner.js"
   },
+  "keywords": ["obfuscator", "javascript", "security", "code-protection"],
+  "author": "SentinelCore",
+  "license": "MIT",
   "engines": {
-    "node": ">=18"
-  },
-  "dependencies": {
-    "express": "^4.21.2"
+    "node": ">=16.0.0"
   }
 }
